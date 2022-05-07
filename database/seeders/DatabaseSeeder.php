@@ -31,14 +31,14 @@ class DatabaseSeeder extends Seeder
         
         Category::factory(5)->create();
         Tag::factory(20)->create();
-        
+
         $posts = Post::factory(50)->create();
         foreach ($posts as $post) {
-            $tags_ids = [];
-            $tags_ids[] = Tag::all()->random()->id;
-            $tags_ids[] = Tag::all()->random()->id;
-            $tags_ids[] = Tag::all()->random()->id;
-            $post->tags()->sync($tags_ids);
+            $tagsId = [];
+            $tagsId[] = Tag::all()->random()->id;
+            $tagsId[] = Tag::all()->random()->id;
+            $tagsId[] = Tag::all()->random()->id;
+            $post->tags()->sync($tagsId);
             $post->image()->save(Image::factory()->make());
         }
 

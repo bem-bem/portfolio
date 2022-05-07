@@ -69,16 +69,16 @@ class RegisterController extends Controller
         if ($role == null) {
             // if there is no role create new 1 and its a user role
             $role =  Role::create(['name' => 'user']);
-            $role_id = $role->id;
+            $roleId = $role->id;
         } else {
-            $role_id = $role->id;
+            $roleId = $role->id;
         }
 
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'role_id' => $role_id
+            'role_id' => $roleId
         ]);
     }
 }
