@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Comment;
 use App\Models\Post;
 use App\Models\Role;
+use App\Models\Tag;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -23,6 +24,7 @@ class DatabaseSeeder extends Seeder
         Role::factory(1)->create();
         User::factory(5)->create();
         Category::factory(5)->create();
+        Tag::factory(20)->create();
         Post::factory(50)->create();
         Comment::factory(100)->create();
     }
