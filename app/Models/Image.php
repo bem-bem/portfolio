@@ -9,6 +9,8 @@ class Image extends Model
 {
     use HasFactory;
 
+    protected $guarded = ['id'];
+    
     //parent one to one polymorphic table
     public function imageable()
     {
