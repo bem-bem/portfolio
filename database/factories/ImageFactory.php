@@ -16,8 +16,17 @@ class ImageFactory extends Factory
      */
     public function definition()
     {
+        $dummyImages = [
+            '1.jpg',
+            '2.jpg',
+            '3.jpg',
+            '4.jpg',
+            '5.jpg',
+        ];
         return [
-            //
+            'name' => $this->faker->word(),
+            'extension' => 'jpg',
+            'path' => 'images/' . $this->faker->randomElement($dummyImages),
         ];
     }
 }
