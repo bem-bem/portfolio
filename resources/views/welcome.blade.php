@@ -27,7 +27,7 @@
                                 <div class="card mb-3">
                                     <div class="row g-0">
                                         <div class="col-md-4">
-                                            <img src="..." class="img-fluid rounded-start" alt="...">
+                                            <img src="{{ asset('storage/' . $post->image->path) }}" class="img-fluid rounded-start" alt="...">
                                         </div>
                                         <div class="col-md-8">
                                             <div class="card-body">
@@ -48,19 +48,7 @@
                      @endforelse
                     </div>
                     <!-- Pagination-->
-                    <nav aria-label="Pagination">
-                        <hr class="my-0" />
-                        <ul class="pagination justify-content-center my-4">
-                            <li class="page-item disabled"><a class="page-link" href="#" tabindex="-1"
-                                    aria-disabled="true">Newer</a></li>
-                            <li class="page-item active" aria-current="page"><a class="page-link" href="#!">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#!">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#!">3</a></li>
-                            <li class="page-item disabled"><a class="page-link" href="#!">...</a></li>
-                            <li class="page-item"><a class="page-link" href="#!">15</a></li>
-                            <li class="page-item"><a class="page-link" href="#!">Older</a></li>
-                        </ul>
-                    </nav>
+                    {{ $posts->links() }}
                 </div>
                 <!-- Side widgets-->
                 <div class="col-lg-4">
@@ -76,68 +64,11 @@
                         </div>
                     </div>
                     <!-- Categories widget-->
-                    <div class="card mb-4">
-                        <div class="card-header">Categories</div>
-                        <div class="card-body">
-                           <div class="row">
-                               @forelse ($categories as $categorie)
-                                <div class="col-sm-6">
-                                    <ul class="list-unstyled mb-0">
-                                        <li><a href="#!">{{ $categorie->name }}</a></li>
-                                    </ul>
-                                </div>
-                                @empty
-                                <p>No Categories found</p>
-                                @endforelse
-                           </div>
-                        </div>
-                    </div>
+                    <x-widgets.categories :categories="$categories"></x-widgets.categories>
                     <!-- Recent posts widget-->
-                    <div class="card mb-4">
-                        <div class="card-header">Recent posts</div>
-                        <div class="card-body">
-                            @forelse ($recent_posts as $recent_post)
-                                <div class="card mb-3">
-                                    <div class="card-body">
-                                        <div class="row g-0">
-                                            <div class="col-md-4">
-                                                <img src="..." class="img-fluid rounded-start" alt="...">
-                                            </div>
-                                            <div class="col-md-8">
-                                                <div class="card-body">
-                                                    <h5 class="card-title">{{ \Str::limit($recent_post->title, 10) }}</h5>
-                                                    <small class="card-text text-secondary">{{ \Str::limit($recent_post->intro, 10) }}</small>
-                                                    <p class="card-text">
-                                                        <small class="text-muted">{{ $recent_post->created_at->diffForHumans() }}</small>
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            @empty
-                                <p>No Recents posts yet</p>
-                            @endforelse
-                           
-                        </div>
-                    </div>
+                    <x-widgets.recent-posts :recent_posts="$recent_posts"></x-widgets.recent-posts>
                     <!-- Tags widget-->
-                    <div class="card mb-4">
-                        <div class="card-header">Tags</div>
-                        <div class="card-body">
-                            <div class="row">
-                                @forelse ($tags as $tag)
-                                <div class="col-sm-3">
-                                    <ul class="list-unstyled mb-0">
-                                        <li><a href="#!">{{ $tag->name }}</a></li>
-                                    </ul>
-                                </div>
-                                @empty
-                                <p>No Tags found</p>
-                                @endforelse
-                            </div>
-                        </div>
-                    </div>
+                    <x-widgets.tags :tags="$tags"></x-widgets.tags>
                 </div>
             </div>
         </div>
