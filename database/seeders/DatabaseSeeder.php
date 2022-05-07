@@ -25,7 +25,17 @@ class DatabaseSeeder extends Seeder
         User::factory(5)->create();
         Category::factory(5)->create();
         Tag::factory(20)->create();
-        Post::factory(50)->create();
+        $posts = Post::factory(50)->create();
         Comment::factory(100)->create();
+
+        foreach ($posts as $post) {
+
+            $tags_ids = [];
+            $tags_ids[] = Tag::all()->random()->id;
+            $tags_ids[] = Tag::all()->random()->id;
+            $tags_ids[] = Tag::all()->random()->id;
+
+            $post->tags()->sync($tags_ids);
+        }
     }
 }
