@@ -7,7 +7,7 @@
                 <!-- Blog entries-->
                 <div class="col-lg-8">
                     <!-- Featured blog post-->
-                    <div class="card mb-4">
+                    {{-- <div class="card mb-4">
                         <a href="#!"><img class="card-img-top" src="https://dummyimage.com/850x350/dee2e6/6c757d.jpg"
                                 alt="..." /></a>
                         <div class="card-body">
@@ -18,20 +18,28 @@
                                 vero voluptate voluptatibus possimus, veniam magni quis!</p>
                             <a class="btn btn-primary" href="#!">Read more →</a>
                         </div>
-                    </div>
+                    </div> --}}
                     <!-- Nested row for non-featured blog posts-->
                     <div class="row">
                      @forelse ($posts as $post)
-                         <div class="col-lg-6">
+                         <div class="col-lg-12">
                                 <!-- Blog post-->
-                                <div class="card mb-4">
-                                    <a href="#!"><img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." /></a>
-                                    <div class="card-body">
-                                        <div class="small text-muted">January 1, 2022</div>
-                                        <h2 class="card-title h4">Post Title</h2>
-                                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                            Reiciendis aliquid atque, nulla.</p>
-                                        <a class="btn btn-primary" href="#!">Read more →</a>
+                                <div class="card mb-3">
+                                    <div class="row g-0">
+                                        <div class="col-md-4">
+                                            <img src="..." class="img-fluid rounded-start" alt="...">
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="card-body">
+                                                <h5 class="card-title">{{ $post->title }}</h5>
+                                                <small class="card-text text-secondary">{{ $post->intro }}</small>
+                                                <p class="card-text">{{ $post->content }}</p>
+                                                <p class="card-text">
+                                                    <small class="text-muted">{{ $post->created_at->diffForHumans() }}</small> 
+                                                    <small><i class="bi bi-chat-dots"></i> {{ $post->comments_count }}</small>
+                                                </p>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -71,29 +79,64 @@
                     <div class="card mb-4">
                         <div class="card-header">Categories</div>
                         <div class="card-body">
-                            <div class="row">
+                           <div class="row">
+                               @forelse ($categories as $categorie)
                                 <div class="col-sm-6">
                                     <ul class="list-unstyled mb-0">
-                                        <li><a href="#!">Web Design</a></li>
-                                        <li><a href="#!">HTML</a></li>
-                                        <li><a href="#!">Freebies</a></li>
+                                        <li><a href="#!">{{ $categorie->name }}</a></li>
                                     </ul>
                                 </div>
-                                <div class="col-sm-6">
-                                    <ul class="list-unstyled mb-0">
-                                        <li><a href="#!">JavaScript</a></li>
-                                        <li><a href="#!">CSS</a></li>
-                                        <li><a href="#!">Tutorials</a></li>
-                                    </ul>
-                                </div>
-                            </div>
+                                @empty
+                                <p>No Categories found</p>
+                                @endforelse
+                           </div>
                         </div>
                     </div>
-                    <!-- Side widget-->
+                    <!-- Recent posts widget-->
                     <div class="card mb-4">
-                        <div class="card-header">Side Widget</div>
-                        <div class="card-body">You can put anything you want inside of these side widgets. They are easy to
-                            use, and feature the Bootstrap 5 card component!</div>
+                        <div class="card-header">Recent posts</div>
+                        <div class="card-body">
+                            @forelse ($recent_posts as $recent_post)
+                                <div class="card mb-3">
+                                    <div class="card-body">
+                                        <div class="row g-0">
+                                            <div class="col-md-4">
+                                                <img src="..." class="img-fluid rounded-start" alt="...">
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">{{ \Str::limit($recent_post->title, 10) }}</h5>
+                                                    <small class="card-text text-secondary">{{ \Str::limit($recent_post->intro, 10) }}</small>
+                                                    <p class="card-text">
+                                                        <small class="text-muted">{{ $recent_post->created_at->diffForHumans() }}</small>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @empty
+                                <p>No Recents posts yet</p>
+                            @endforelse
+                           
+                        </div>
+                    </div>
+                    <!-- Tags widget-->
+                    <div class="card mb-4">
+                        <div class="card-header">Tags</div>
+                        <div class="card-body">
+                            <div class="row">
+                                @forelse ($tags as $tag)
+                                <div class="col-sm-3">
+                                    <ul class="list-unstyled mb-0">
+                                        <li><a href="#!">{{ $tag->name }}</a></li>
+                                    </ul>
+                                </div>
+                                @empty
+                                <p>No Tags found</p>
+                                @endforelse
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
