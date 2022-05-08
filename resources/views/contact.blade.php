@@ -20,7 +20,7 @@
             </div>
             <div class="col-12">
               <x-inputs.label for="message">Message</x-inputs.label>
-              <textarea name="message" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+              <x-inputs.txtarea name="message" rows="3">{{ old('message') }}</x-inputs.txtarea>
             </div>
             <div class="col-12">
               <x-button class="float-end">Send</x-button>
