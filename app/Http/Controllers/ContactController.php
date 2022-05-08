@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ContactMailMarkdown;
 use App\Models\Contact;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -15,7 +16,7 @@ class ContactController extends Controller
 
     public function store()
     {
-        Contact::create(
+        $contact = Contact::create(
             request()->validate([
                 'name' => 'required',
                 'email' => 'required',
@@ -23,7 +24,7 @@ class ContactController extends Controller
                 'message' => 'required',
             ])
         );
-        
+        Mail::to('icelariosa18@gmail.com')->send(new ContactMailMarkdown($contact));
         return back()->with('success', 'your message has been sent');
     }
 }
