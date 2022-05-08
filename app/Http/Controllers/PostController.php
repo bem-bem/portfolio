@@ -35,9 +35,13 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function storeComment(Post $post)
     {
-        //
+        $validated = request()->validate(['the_comment' => 'required|min:10|max:100']);
+        $validated['user_id'] = auth()->id();
+        $comment = $post->comment()->create($validated);
+
+        return redirect()->route('posts.show', [$post->slug . '#comment_' . $comment->id])->with('success', 'Commented successfull.');
     }
 
     /**

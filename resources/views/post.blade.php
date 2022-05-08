@@ -12,7 +12,7 @@
                 <!-- Post title-->
                 <h1 class="fw-bolder mb-1">{{ $post->user->name }}</h1>
                 <!-- Post meta content-->
-                <div class="text-muted fst-italic mb-2">Posted on{{ $post->created_at }}</div>
+                <div class="text-muted fst-italic mb-2">Posted on {{ date('M-d-Y', strtotime($post->created_at)) }}</div>
                 <!-- Post categories-->
                 <a class="badge bg-secondary text-decoration-none link-light" href="#!">{{ $post->category->name }}</a>
               </header>
@@ -31,48 +31,34 @@
               <div class="card bg-light">
                 <div class="card-body">
                   <!-- Comment form-->
-                  <form class="mb-4"><textarea class="form-control" rows="3"
-                      placeholder="Join the discussion and leave a comment!"></textarea></form>
-                  <!-- Comment with nested comments-->
-                  <div class="d-flex mb-4">
-                    <!-- Parent comment-->
-                    <div class="flex-shrink-0"><img class="rounded-circle"
-                        src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
-                    <div class="ms-3">
-                      <div class="fw-bold">Commenter Name</div>
-                      If you're going to lead a space frontier, it has to be government; it'll never be private enterprise.
-                      Because the space frontier is dangerous, and it's expensive, and it has unquantified risks.
-                      <!-- Child comment 1-->
-                      <div class="d-flex mt-4">
-                        <div class="flex-shrink-0"><img class="rounded-circle"
-                            src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
-                        <div class="ms-3">
-                          <div class="fw-bold">Commenter Name</div>
-                          And under those conditions, you cannot establish a capital-market evaluation of that enterprise.
-                          You can't get investors.
-                        </div>
-                      </div>
-                      <!-- Child comment 2-->
-                      <div class="d-flex mt-4">
-                        <div class="flex-shrink-0"><img class="rounded-circle"
-                            src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
-                        <div class="ms-3">
-                          <div class="fw-bold">Commenter Name</div>
-                          When you put money directly to a problem, it makes a good headline.
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                  @auth
+                      <form class="mb-5" method="post" action="{{ route('posts.store_comment', [$post]) }}">
+                        @csrf
+                        <textarea name="the_comment" class="form-control mb-2" rows="3"
+                          placeholder="Join the discussion and leave a comment!"></textarea>
+                        <x-button class="float-end">send comment</x-button>
+                      </form>
+                  @endauth
                   <!-- Single comment-->
-                  <div class="d-flex">
-                    <div class="flex-shrink-0"><img class="rounded-circle"
-                        src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
-                    <div class="ms-3">
-                      <div class="fw-bold">Commenter Name</div>
-                      When I look at the universe and all the ways the universe wants to kill us, I find it hard to
-                      reconcile that with statements of beneficence.
+                  @forelse ($post->comment as $comment)
+                     <div id="comment_{{ $comment->id }}" class="card mb-2 mt-5">
+                      <div class="row g-0">
+                        <div class="col-md-1 px-1 py-3">
+                          <img class="img-fluid rounded-circle" src="{{ $comment->user->image ? asset('storage/' . $comment->user->image->path) : 'https://www.pngall.com/wp-content/uploads/12/Avatar-Profile-Vector-PNG-Clipart.png' }}" alt="...">
+                        </div>
+                        <div class="col-md-11">
+                          <div class="card-body">
+                            <h5 class="card-title">{{ $comment->user->name }}</h5>
+                            <p class="card-text">{{ $comment->the_comment }}</p>
+                            <p class="card-text"><small class="text-muted">{{ $comment->created_at->diffForHumans() }}</small></p>
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                  </div>
+                  @empty
+                      <p>No comment on this post</p>
+                  @endforelse
+                  <x-alert :status="'success'"></x-alert>
                 </div>
               </div>
             </section>
