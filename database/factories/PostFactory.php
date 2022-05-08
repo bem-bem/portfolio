@@ -24,7 +24,7 @@ class PostFactory extends Factory
             'intro' => $this->faker->sentence(),
             'content' => $this->faker->sentence(5),
             'user_id' => User::factory(),
-            'category_id' => Category::factory(),
+            'category_id' => Category::all()->random()->id,
         ];
     }
 }
