@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Mail\ContactMail;
 use App\Models\Contact;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -24,7 +23,6 @@ class ContactController extends Controller
                 'message' => 'required',
             ])
         );
-        Mail::to("icelariosa18@gmail.com")->send(new ContactMail("bem-bem"));
         
         return back()->with('success', 'your message has been sent');
     }
