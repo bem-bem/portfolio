@@ -11,7 +11,7 @@ class Post extends Model
 
     protected $guarded = ['id'];
 
-    public function users()
+    public function user()
     {
         return $this->belongsTo(User::class);
     }
@@ -21,12 +21,12 @@ class Post extends Model
         return $this->belongsTo(Category::class);
     }
 
-    public function tags()
+    public function tag()
     {
         return $this->belongsToMany(Tag::class);
     }
 
-    public function comments()
+    public function comment()
     {
         return $this->hasMany(Comment::class);
     }

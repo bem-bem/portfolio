@@ -17,9 +17,9 @@ class WelcomeInvokable extends Controller
      */
     public function __invoke(Request $request)
     {
-        $posts = Post::withCount('comments')->paginate(10);
+        $posts = Post::withCount('comment')->paginate(10);
         $recent_posts = Post::latest()->take(5)->get();
-        $categories = Category::withCount('posts')->orderBy('posts_count', 'desc')->take(10)->get();
+        $categories = Category::withCount('post')->orderBy('post_count', 'desc')->take(10)->get();
         $tags = Tag::latest()->take(50)->get();
         return view('welcome', ['posts' => $posts, 'categories' => $categories, 'tags' => $tags, 'recent_posts' => $recent_posts]);
     }
