@@ -45,13 +45,13 @@
                                 Categories
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <li><a class="dropdown-item" href="{{ route('categories.index') }}">View all categories</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('category.index') }}">View all categories</a></li>
                                     <li>
                                         <hr class="dropdown-divider">
                                     </li>
                                 @foreach ($navbarCategorys as $navbarCategory)
                                     <li>
-                                        <a class="dropdown-item" href="{{ route('categories.show', [$navbarCategory]) }}">{{ $navbarCategory->name }}</a>
+                                        <a class="dropdown-item" href="{{ route('category.show', [$navbarCategory]) }}">{{ $navbarCategory->name }}</a>
                                     </li>
                                 @endforeach
                             </ul>

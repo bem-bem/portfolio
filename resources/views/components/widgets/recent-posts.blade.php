@@ -13,7 +13,7 @@
           <div class="col-md-8">
             <div class="card-body">
               <h5 class="card-title">
-                  <a href="{{ route('posts.show', [$recent_post]) }}">{{ \Str::limit($recent_post->title, 10) }}</a>
+                  <a href="{{ route('post.show', [$recent_post]) }}">{{ \Str::limit($recent_post->title, 10) }}</a>
                 </h5>
               <small class="card-text text-secondary">{{ \Str::limit($recent_post->intro, 10) }}</small>
               <p class="card-text">

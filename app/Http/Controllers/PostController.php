@@ -41,7 +41,7 @@ class PostController extends Controller
         $validated['user_id'] = auth()->id();
         $comment = $post->comment()->create($validated);
 
-        return redirect()->route('posts.show', [$post->slug . '#comment_' . $comment->id])->with('success', 'Commented successfull.');
+        return redirect()->route('post.show', [$post->slug . '#comment_' . $comment->id])->with('success', 'Commented successfull.');
     }
 
     /**

@@ -32,7 +32,7 @@
                 <div class="card-body">
                   <!-- Comment form-->
                   @auth
-                      <form method="post" action="{{ route('posts.store_comment', [$post]) }}">
+                      <form method="post" action="{{ route('post.store_comment', [$post]) }}">
                         @csrf
                             <x-inputs.txtarea name="the_comment" placeholder="Join the discussion and leave a comment!" rows="3">{{
                               old('the_comment') }}</x-inputs.txtarea>

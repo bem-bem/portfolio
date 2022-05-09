@@ -20,7 +20,7 @@
               <div class="col-md-8">
                 <div class="card-body">
                   <h5 class="card-title">
-                    <a href="{{ route('posts.show', [$post]) }}">{{ $post->title }}</a>
+                    <a href="{{ route('post.show', [$post]) }}">{{ $post->title }}</a>
                   </h5>
                   <small class="card-text text-secondary">{{ $post->intro }}</small>
                   <p class="card-text">{{ $post->content }}</p>

@@ -7,7 +7,7 @@
       @forelse ($tags as $tag)
       <div class="col-sm-3">
         <ul class="list-unstyled mb-0">
-          <li><a href="{{ route('tags.show', [$tag]) }}">{{ $tag->name }}</a></li>
+          <li><a href="{{ route('tag.show', [$tag]) }}">{{ $tag->name }}</a></li>
         </ul>
       </div>
       @empty

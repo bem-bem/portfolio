@@ -4,10 +4,10 @@
   <div class="card-header">Categories</div>
   <div class="card-body">
     <div class="row">
-      @forelse ($categories as $categorie)
+      @forelse ($categories as $category)
       <div class="col-sm-6">
         <ul class="list-unstyled mb-0">
-          <li><a href="{{ route('categories.show', [$categorie]) }}">{{ $categorie->name }} {{ $categorie->post_count }}</a></li>
+          <li><a href="{{ route('category.show', [$category]) }}">{{ $category->name }} {{ $category->post_count }}</a></li>
         </ul>
       </div>
       @empty
