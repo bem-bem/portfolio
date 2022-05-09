@@ -5,6 +5,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\WelcomeInvokable;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\TagController;
 
 Route::get('/', WelcomeInvokable::class)->name('welcome');
 
@@ -15,5 +16,7 @@ Route::get('/contact', [ContactController::class, 'create'])->name('contact.crea
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
 Route::get('/categories/{category:slug}', [CategoryController::class, 'show'])->name('categories.show');
+
+Route::get('/tags/{tag:name}', [TagController::class, 'show'])->name('tags.show');
 
 Auth::routes();
