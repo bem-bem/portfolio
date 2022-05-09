@@ -11,7 +11,7 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        return view('categories.index', ['categories' => Category::withCount('post')->paginate(1)]);
+        return view('categories.index', ['categories' => Category::withCount('post')->paginate(10)]);
     }
 
     public function show(Category $category)
