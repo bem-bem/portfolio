@@ -15,9 +15,10 @@
               <h5 class="card-title">
                   <a href="{{ route('post.show', [$recent_post]) }}">{{ \Str::limit($recent_post->title, 10) }}</a>
                 </h5>
-              <small class="card-text text-secondary">{{ \Str::limit($recent_post->intro, 10) }}</small>
+              <small class="card-text text-secondary">{{ \Str::limit($recent_post->intro, 20) }}</small>
               <p class="card-text">
-                <small class="text-muted">{{ $recent_post->created_at->diffForHumans() }}</small>
+                <small class="text-muted me-3"><x-icons.user /> {{ $recent_post->user->name }}</small> <br>
+                <small class="text-muted me-3"><x-icons.time /> {{ $recent_post->created_at->diffForHumans() }}</small>
               </p>
             </div>
           </div>

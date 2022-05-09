@@ -7,10 +7,10 @@
           <div class="col-md-3 mb-3">
             <div class="card">
               <ul class="list-group list-group-flush">
-                <li class="list-group-item"><a href="{{ route('category.show', [$category]) }}">{{ $category->name }}</a></li>
-                <li class="list-group-item">{{ $category->post_count }}</li>
-                <li class="list-group-item">{{ $category->user->name }}</li>
-                <li class="list-group-item">{{ $category->created_at->diffForHumans() }}</li>
+                <li class="list-group-item"><a href="{{ route('category.show', [$category]) }}"><x-icons.category /> {{ $category->name }}</a></li>
+                <li class="list-group-item"><x-icons.post /> {{ $category->post_count }}</li>
+                <li class="list-group-item"><x-icons.user /> {{ $category->user->name }}</li>
+                <li class="list-group-item"><x-icons.time /> {{ $category->created_at->diffForHumans() }}</li>
               </ul>
             </div>
           </div>

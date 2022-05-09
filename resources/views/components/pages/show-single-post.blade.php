@@ -4,12 +4,17 @@
     <!-- Post title-->
     <h1 class="fw-bolder mb-1">{{ $post->user->name }}</h1>
     <!-- Post meta content-->
-    <div class="text-muted fst-italic mb-2">Posted on {{ date('M-d-Y', strtotime($post->created_at)) }}</div>
+    <div class="text-muted fst-italic mb-2"><x-icons.calendar /> {{ date('M-d-Y', strtotime($post->created_at)) }}</div>
     <!-- Post categories-->
-    <a class="badge bg-secondary text-decoration-none link-light" href="#!">{{ $post->category->name }}</a>
+    <x-badge><x-icons.category /> {{ $post->category->name }}</x-badge> <br>
+    {{-- post tags --}}
+    @foreach ($post->tag as $tag)
+    <x-badge color="bg-info text-dark"><x-icons.tag /> {{ $tag->name }}</x-badge>
+    @endforeach
   </header>
   <!-- Preview image figure-->
-  <figure class="mb-4"><img class="img-fluid rounded" src="{{ asset('storage/' . $post->image->path) }}" alt="..." />
+  <figure class="mb-4">
+    <img class="img-fluid rounded" src="{{ asset('storage/' . $post->image->path) }}" alt="..." />
   </figure>
   <!-- Post content-->
   <section class="mb-5">

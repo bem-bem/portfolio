@@ -12,9 +12,17 @@
         <small class="card-text text-secondary">{{ $post->intro }}</small>
         <p class="card-text">{{ $post->content }}</p>
         <p class="card-text">
-          <small class="text-muted">{{ $post->user->name }}</small>
-          <small class="text-muted">{{ $post->created_at->diffForHumans() }}</small>
-          <small><i class="bi bi-chat-dots"></i> {{ $post->comment_count }}</small>
+          <small class="text-muted me-3"><x-icons.user /> {{ $post->user->name }}</small>
+          <small class="text-muted me-3"><x-icons.time /> {{ $post->created_at->diffForHumans() }}</small>
+          <small class="text-muted"><x-icons.comment /> {{ $post->comment_count }}</small>
+        </p>
+        <p class="card-text">
+          <x-badge><x-icons.category /> {{ $post->category->name }}</x-badge>
+        </p>
+        <p class="card-text">
+          @foreach ($post->tag as $tag)
+            <x-badge color="bg-info text-dark"><x-icons.tag /> {{ $tag->name }}</x-badge>
+          @endforeach
         </p>
       </div>
     </div>
