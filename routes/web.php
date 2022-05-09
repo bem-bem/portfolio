@@ -16,6 +16,7 @@ Route::get('/contact', [ContactController::class, 'create'])->name('contact.crea
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
 Route::get('/categories/{category:slug}', [CategoryController::class, 'show'])->name('categories.show');
+Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
 
 Route::get('/tags/{tag:name}', [TagController::class, 'show'])->name('tags.show');
 
