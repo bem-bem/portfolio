@@ -37,6 +37,7 @@
                                                 <small class="card-text text-secondary">{{ $post->intro }}</small>
                                                 <p class="card-text">{{ $post->content }}</p>
                                                 <p class="card-text">
+                                                    <small class="text-muted">{{ $post->user->name }}</small>
                                                     <small class="text-muted">{{ $post->created_at->diffForHumans() }}</small> 
                                                     <small><i class="bi bi-chat-dots"></i> {{ $post->comment_count }}</small>
                                                 </p>
