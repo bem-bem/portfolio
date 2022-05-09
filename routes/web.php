@@ -1,8 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
-
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\WelcomeInvokable;
 use App\Http\Controllers\ContactController;
@@ -14,5 +13,7 @@ Route::post('/posts/{post:slug}', [PostController::class, 'storeComment'])->name
 
 Route::get('/contact', [ContactController::class, 'create'])->name('contact.create');
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
+
+Route::get('/categories/{category:slug}', [CategoryController::class, 'show'])->name('categories.show');
 
 Auth::routes();
