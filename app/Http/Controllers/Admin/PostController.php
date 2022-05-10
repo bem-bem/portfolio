@@ -51,14 +51,14 @@ class PostController extends Controller
         //
     }
 
-    public function edit($id)
+    public function edit(Post $post)
     {
-        //
+        return view('admin.posts.edit', ['post' => $post, 'categories' => Category::pluck('name', 'id')]);
     }
 
     public function update(Request $request, $id)
     {
-        //
+        dd($request->all());
     }
 
     public function destroy($id)
