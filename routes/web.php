@@ -24,4 +24,6 @@ Route::get('/categories', [CategoryController::class, 'index'])->name('category.
 Route::get('/tags/{tag:name}', [TagController::class, 'show'])->name('tag.show');
 
 // admin 
-Route::get('/admin/dashboard', [AdminDashboardController::class, 'index']) ->name('admin.index');
+Route::prefix('dashboard')->name('admin.')->middleware(['auth','is.admin'])->group(function() {
+  Route::get('/', [AdminDashboardController::class, 'index'])->name('index');
+});
