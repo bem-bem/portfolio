@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
     {
         //it should be in order
         Role::factory(1)->create();
-        Role::factory(1)->create(['name' => 'admin']);
+        // Role::factory(1)->create(['name' => 'admin']);
 
         $users = User::factory(5)->create();
         foreach ($users as $user) {
