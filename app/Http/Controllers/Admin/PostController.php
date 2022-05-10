@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use App\Models\Post;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class PostController extends Controller
 {
@@ -32,7 +33,17 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate($this->rules);
-        dd($validated);
+        $validated['user_id'] = auth()->user()->id;
+        $post = Post::create($validated);
+        if ($request->has('thumbnail')) {
+            $thumbnail = $request->file('thumbnail');
+            $filename = $thumbnail->getClientOriginalName();
+            $file_extensio = $thumbnail->getClientOriginalExtension();
+            $path = $thumbnail->store('post-thumbnail');
+
+            $post->image()->create(['name' => $filename, 'extension' => $file_extensio, 'path' => $path]);
+        }
+        return back()->with('success', 'A new post has been created.');
     }
 
     public function show($id)

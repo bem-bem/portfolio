@@ -9,6 +9,7 @@
           <div class="card">
             <div class="card-header">Add New Post</div>
             <div class="card-body">
+              <x-alert :status="'success'" />
               <form action="{{ route('admin.posts.store') }}" method="post" enctype="multipart/form-data">
                 @csrf
                   <div class="mb-3">
