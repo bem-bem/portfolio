@@ -8,6 +8,7 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Requests\PostRequest;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -47,9 +48,27 @@ class PostController extends Controller
         return view('admin.posts.edit', ['post' => $post, 'categories' => Category::pluck('name', 'id')]);
     }
 
-    public function update(Request $request, $id)
+    public function update(PostRequest $postRequest, Post $post)
     {
-        dd($request->all());
+        $validated = $postRequest->validated();
+        $post->fill($validated);
+
+        if ($postRequest->hasFile('thumbnail')) {
+            $path = $postRequest->file('thumbnail')->store('post-thumbnails');
+
+            if ($post->image) {
+                Storage::delete($post->image->path);
+                $post->image->path = $path;
+                $post->image->save();
+            } else {
+                $post->image()->save(
+                    Image::make(['path' => $path])
+                );
+            }
+        }
+
+        $post->save();
+        return redirect()->route('admin.posts.index')->with('success', 'Post Updated successfully.');
     }
 
     public function destroy($id)
