@@ -19,7 +19,6 @@
   <!-- Post content-->
   <section class="mb-5">
     <h2 class="fw-bolder">{{ $post->title }}</h2>
-    <small class="fst-italic fw-light text-secondary mb-5">{{ $post->intro }}</small>
     <p class="fs-5 mb-4">{{ $post->content }}</p>
   </section>
 </article>

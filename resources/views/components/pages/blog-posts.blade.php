@@ -9,7 +9,6 @@
         <h5 class="card-title">
           <a href="{{ route('post.show', [$post]) }}">{{ $post->title }}</a>
         </h5>
-        <small class="card-text text-secondary">{{ $post->intro }}</small>
         <p class="card-text">{{ $post->content }}</p>
         <p class="card-text">
           <small class="text-muted me-3"><x-icons.user /> {{ $post->user->name }}</small>
