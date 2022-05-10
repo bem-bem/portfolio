@@ -1,11 +1,14 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminDashboardController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\WelcomeInvokable;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\TagController;
+
+Auth::routes();
 
 Route::get('/', WelcomeInvokable::class)->name('welcome');
 
@@ -20,4 +23,5 @@ Route::get('/categories', [CategoryController::class, 'index'])->name('category.
 
 Route::get('/tags/{tag:name}', [TagController::class, 'show'])->name('tag.show');
 
-Auth::routes();
+// admin 
+Route::get('/admin/dashboard', [AdminDashboardController::class, 'index']) ->name('admin.index');
