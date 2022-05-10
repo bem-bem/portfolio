@@ -22,7 +22,7 @@ class PostController extends Controller
    
     public function index()
     {
-        return view('admin.posts.index');
+        return view('admin.posts.index', ['posts' => Post::with('user')->get()]);
     }
 
     public function create()
