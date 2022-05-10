@@ -3,23 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Post;
+use App\Models\Image;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use App\Http\Requests\PostRequest;
 use App\Http\Controllers\Controller;
 
 class PostController extends Controller
 {
-
-    private $rules = [
-        'title' => 'required',
-        'slug' => 'required',
-        'category_id' => 'required',
-        'thumbnail' => 'required',
-        'intro' => 'required',
-        'content' => 'required',
-
-    ];
-   
     public function index()
     {
         return view('admin.posts.index', ['posts' => Post::with('user')->get()]);
@@ -30,19 +21,19 @@ class PostController extends Controller
         return view('admin.posts.create', ['categories' => Category::pluck('name', 'id')]);
     }
 
-    public function store(Request $request)
+    public function store(PostRequest $postRequest)
     {
-        $validated = $request->validate($this->rules);
-        $validated['user_id'] = auth()->user()->id;
-        $post = Post::create($validated);
-        if ($request->has('thumbnail')) {
-            $thumbnail = $request->file('thumbnail');
-            $filename = $thumbnail->getClientOriginalName();
-            $file_extensio = $thumbnail->getClientOriginalExtension();
-            $path = $thumbnail->store('post-thumbnail');
+        $validated = $postRequest->validated();
+        $validated['user_id'] = $postRequest->user()->id;
+        $Post = Post::create($validated);
 
-            $post->image()->create(['name' => $filename, 'extension' => $file_extensio, 'path' => $path]);
+        if ($postRequest->hasFile('thumbnail')) {
+            $path = $postRequest->file('thumbnail')->store('post-thumbnails');
+            $Post->image()->save(
+                Image::make(['path' => $path])
+            );
         }
+
         return back()->with('success', 'A new post has been created.');
     }
 
