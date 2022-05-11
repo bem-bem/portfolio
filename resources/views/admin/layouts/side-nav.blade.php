@@ -8,25 +8,39 @@
           Dashboard
         </a>
         <div class="sb-sidenav-menu-heading">.....</div>
-        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts"
-          aria-expanded="false" aria-controls="collapseLayouts">
+        {{-- posts --}}
+        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePosts"
+          aria-expanded="false" aria-controls="collapsePosts">
           <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
           Posts
           <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
         </a>
-        <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+        <div class="collapse" id="collapsePosts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
           <nav class="sb-sidenav-menu-nested nav">
             <a class="nav-link" href="{{ route('admin.posts.create') }}">Create Post</a>
             <a class="nav-link" href="{{ route('admin.posts.index') }}">All posts</a>
           </nav>
         </div>
-        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages"
-          aria-expanded="false" aria-controls="collapsePages">
+        {{-- category --}}
+        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseCategory" aria-expanded="false"
+            aria-controls="collapseCategory">
+            <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+            Categories
+            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+          </a>
+          <div class="collapse" id="collapseCategory" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+            <nav class="sb-sidenav-menu-nested nav">
+              <a class="nav-link" href="{{ route('admin.categories.create') }}">Create category</a>
+              <a class="nav-link" href="{{ route('admin.categories.index') }}">All category</a>
+            </nav>
+          </div>
+        {{-- <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseCategory"
+          aria-expanded="false" aria-controls="collapseCategory">
           <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
-          Pages
+          Categories
           <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-        </a>
-        <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+        </a> --}}
+        {{-- <difv class="collapse" id="collapseCategory" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
           <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth"
               aria-expanded="false" aria-controls="pagesCollapseAuth">
@@ -55,7 +69,7 @@
               </nav>
             </div>
           </nav>
-        </div>
+        </difv> --}}
         <div class="sb-sidenav-menu-heading">Addons</div>
         <a class="nav-link" href="charts.html">
           <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
