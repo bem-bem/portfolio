@@ -1,8 +1,5 @@
 <?php
 
-use App\Http\Controllers\Admin\AdminDashboardController;
-use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
-use App\Http\Controllers\Admin\PostController as AdminPostController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PostController;
@@ -24,10 +21,3 @@ Route::get('/categories/{category:slug}', [CategoryController::class, 'show'])->
 Route::get('/categories', [CategoryController::class, 'index'])->name('category.index');
 
 Route::get('/tags/{tag:name}', [TagController::class, 'show'])->name('tag.show');
-
-// admin 
-Route::prefix('dashboard')->name('admin.')->middleware(['auth','is.admin'])->group(function() {
-  Route::get('/', [AdminDashboardController::class, 'index'])->name('index');
-  Route::resource('/posts', AdminPostController::class);
-  Route::resource('/categories', AdminCategoryController::class);
-});
